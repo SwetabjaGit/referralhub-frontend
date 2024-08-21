@@ -1,0 +1,99 @@
+.webcam-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 110px;
+  margin-right: 100px;
+}
+
+.webcam-left-panel {
+  padding: 20px;
+  width: 66%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+img, video {
+  margin-left: 100px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+
+
+.webcam-right-panel {
+  padding: 20px;
+  width: 33%;
+  margin-left: -20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.webcam-heading-text {
+  font-size: 28px;
+  font-weight: 600;
+  margin-left: 0px;
+}
+
+
+
+
+.webcam-capture-button {
+  margin: 15px 0;
+  width: 250px;
+  cursor: pointer;
+  display: inline-block;
+  outline: 0;
+  border: none;
+  padding: 15px 10px;
+  border-radius: 50px;
+  background-color: #0b57d0;
+  color: white;
+  font-size: 16px;
+  box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.webcam-capture-button:hover {
+  background: rgba(0, 118, 255, 0.9);
+  box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
+}
+
+.capture-image-warning-text {
+  color: red;
+}
+
+
+@media (max-width: 1200px) {
+  img, video {
+    margin-left: 0px;
+  }
+
+  .webcam-container {
+    margin-right: 0;
+  }
+
+  .webcam-right-panel {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .webcam-capture-button {
+    margin: 15px 0;
+    width: 180px;
+    font-size: 16px;
+    padding: 10px 10px;
+  }
+
+  .webcam-right-panel {
+    margin-left: -10px;
+  }
+
+  .webcam-heading-text {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+}
