@@ -9,7 +9,8 @@ import EmailVerified from './components/EmailVerified/EmailVerified';
 import Dashboard from './components/Dashboard/Dashboard';
 
 const App = () => {
-  const user = localStorage.getItem("token");
+  //const user = localStorage.getItem("token");
+  const user = "s4fdbg5f678ngb9vc87v65dbgf4h";
   
   return (
     <div className='app-container'>
