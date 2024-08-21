@@ -62,7 +62,33 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="dashboard_right_panel">
-          <h1>Chart will be displayed here</h1>
+          <h1>Referral Tracking Data</h1>
+          <div className="referral_statistics_container">
+            <div className="referral_statstics_wrapper">
+              <div className="referral_statstics_box">
+                <div className="gross_rewards">
+                  <span color="#1e2433" className="gross_rewards_text">
+                    Gross Rewards Earned
+                  </span>  
+                </div>
+                <div className="gross_rewards_container">
+                  <div className="gross_rewards">
+                    <span color="#1e2433" className="gross_rewards_value">
+                      ₹0.00
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="referral_statstics_box">
+                <span color="#1e2433" className="referred_friends_text">
+                  Referred Friends
+                </span>
+                <span color="#3067f0" className="referred_friends_value">
+                  2
+                </span>
+              </div>
+            </div>
+          </div>
           <div className="chart_container">
             <Line 
               className="chart" 

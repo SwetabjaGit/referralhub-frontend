@@ -121,10 +121,94 @@
 
 .dashboard_right_panel h1 {
   margin: 0;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: -10px;
   font-weight: 600;
 }
+
+
+
+
+.referral_statistics_container {
+  margin: 20px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  display: flex;
+  padding: 18px;
+  flex-direction: column;
+  flex-shrink: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.referral_statstics_wrapper {
+  display: flex;
+  flex: 1 0 0%;
+}
+
+.referral_statstics_box {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex: 1 0 0%;
+}
+
+.gross_rewards {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.gross_rewards_text {
+  display: block;
+  color: #1e2433;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0px 8px 15px 0px;
+  text-align: left;
+  font-weight: 600;
+  white-space: normal;
+}
+
+.gross_rewards_container {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.gross_rewards_value {
+  display: block;
+  color: #1e2433;
+  line-height: 20px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 24px;
+  white-space: normal;
+}
+
+.referred_friends_text {
+  display: block;
+  color: #1e2433;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: right;
+  font-weight: 600;
+  white-space: normal;
+}
+
+.referred_friends_value {
+  display: block;
+  color: #3067f0;
+  line-height: 20px;
+  text-align: right;
+  font-weight: 600;
+  font-size: 24px;
+  white-space: normal;
+}
+
+
+
 
 .chart_container {
   display: flex;
