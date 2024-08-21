@@ -1,9 +1,16 @@
 import React from "react";
 import "./Dashboard.css";
-import success from "../../assets/speeding_car.jpg";
 import { useLocation } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import Chart, { CategoryScale } from "chart.js/auto";
+
+import success from "../../assets/speeding_car.jpg";
+import whatsappIcon from "../../assets/whatsapp.svg";
+import facebookIcon from "../../assets/facebook.svg";
+import twitterIcon from "../../assets/twitter.svg";
+import telegramIcon from "../../assets/telegram.svg";
+import referlinkIcon from "../../assets/referlink.svg";
+import socialLinks from "../../utils/socialLinks";
 
 Chart.register(CategoryScale);
 
@@ -23,7 +30,6 @@ const Dashboard = () => {
         borderColor: 'rgb(255, 99, 132)',
       },
     ]
-    
   };
 
   const handleLogout = () => {
@@ -64,6 +70,26 @@ const Dashboard = () => {
             />
           </div>
           <div className="referral_share_box">
+            <h2>SHARE NOW</h2>
+            <div className="social_icons_container">
+              <a href={socialLinks.whatsapp} target="_blank" className="social_icon_wrapper">
+                <img src={whatsappIcon} className="social_icon" alt="logo" />
+              </a>
+              <a href={socialLinks.facebook} target="_blank" className="social_icon_wrapper">
+                <img src={facebookIcon} className="social_icon" alt="logo" />
+              </a>
+              <a href={socialLinks.twitter} target="_blank" className="social_icon_wrapper">
+                <img src={twitterIcon} className="social_icon" alt="logo" />
+              </a>
+              <a href={socialLinks.telegram} target="_blank" className="social_icon_wrapper">
+                <img src={telegramIcon} className="social_icon" alt="logo" />
+              </a>
+              <a className="social_icon_wrapper">
+                <img src={referlinkIcon} className="social_icon" alt="logo" />
+              </a>
+            </div>
+            <h2>YOUR CODE</h2>
+            <p>RABJTDFV</p>
           </div>
         </div> 
       </div>
