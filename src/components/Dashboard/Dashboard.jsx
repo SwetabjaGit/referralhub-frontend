@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
-import { useLocation } from "react-router-dom";
 import { Line } from "react-chartjs-2";
 import Chart, { CategoryScale } from "chart.js/auto";
+import axios from "axios";
 
-import success from "../../assets/speeding_car.jpg";
 import whatsappIcon from "../../assets/whatsapp.svg";
 import facebookIcon from "../../assets/facebook.svg";
 import twitterIcon from "../../assets/twitter.svg";
@@ -16,10 +15,33 @@ Chart.register(CategoryScale);
 
 
 const Dashboard = () => {
-  const search = useLocation().search;
-  const paramId = new URLSearchParams(search).get("id");
-  console.log('id: ', paramId);
+  const [userData, setUserData] = useState(null);
+  const [referralLink, setReferralLink] = useState(null);
 
+  useEffect(() => {
+    const generateReferralLink = (code) => {
+      return `http://localhost:5173/register?referralCode=${code}`;
+    }
+
+    const getUserDetails = async () => {
+      try {
+        const options = {
+          method: 'GET',
+          url: 'http://localhost:8080/api/users/getuserdetails',
+          headers: {
+            'auth-token': localStorage.getItem("token")
+          }
+        };
+        const { data } = await axios.request(options);
+        //console.log(data.user);
+        setUserData(data.user);
+        setReferralLink(generateReferralLink(data.user.referralCode));
+      } catch(error) {
+        console.log(error);
+      }
+    }
+    getUserDetails();
+  }, []);
 
   const data = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
@@ -31,6 +53,18 @@ const Dashboard = () => {
       },
     ]
   };
+
+  const getDateFromTimestamp = (date) => {
+    let timestamp = new Date(date);
+    let monthName = timestamp.toLocaleString("en-US", { month: "long" });
+    let dateString = timestamp.getDate() +" "+ monthName + " "+ timestamp.getFullYear();
+    //console.log(dateString);
+    return dateString;
+  }
+
+  const getUpperCased = (str) => {
+    return str.toUpperCase();
+  }
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -51,14 +85,21 @@ const Dashboard = () => {
       </div>
       <div className="dashboard_content">
         <div className="dashboard_left_panel">
-          <img className="profile_image" src={success} alt="profile_img" />
+          <img className="profile_image" src={userData && userData.imageUrl} alt="profile_img" />
           <div className="dashboard_data">
-            <h1>13stabjahazra@gmail.com</h1>
-            <p>CreatedAt: <span>12 March 2024</span></p>
+            <h1>{userData && userData.email}</h1>
+            <p>CreatedAt: <span>{userData && getDateFromTimestamp(userData.createdAt)}</span></p>
             <p>Photo Status: 
-              <span className="photo_verified_text">Verified</span>
+              <span className={
+                userData && (userData.imageVerified ? 
+                  "photo_verified_text_green" : 
+                  "photo_verified_text_red"
+                )}
+              >
+                {userData && (userData.imageVerified ? "Verified" : "Not Verified")}
+              </span>
             </p>
-            <p>ReferralCode: <span>6asc5c7a</span></p>
+            <p>ReferralCode: <span>{userData && getUpperCased(userData.referralCode)}</span></p>
           </div>
         </div>
         <div className="dashboard_right_panel">
@@ -74,7 +115,7 @@ const Dashboard = () => {
                 <div className="gross_rewards_container">
                   <div className="gross_rewards">
                     <span color="#1e2433" className="gross_rewards_value">
-                      ₹0.00
+                      ₹{userData && userData.rewardsEarned}
                     </span>
                   </div>
                 </div>
@@ -84,7 +125,7 @@ const Dashboard = () => {
                   Referred Friends
                 </span>
                 <span color="#3067f0" className="referred_friends_value">
-                  2
+                  {userData && userData.numReferrals}
                 </span>
               </div>
             </div>
@@ -110,12 +151,12 @@ const Dashboard = () => {
               <a href={socialLinks.telegram} target="_blank" className="social_icon_wrapper">
                 <img src={telegramIcon} className="social_icon" alt="logo" />
               </a>
-              <a className="social_icon_wrapper">
+              <a href={referralLink} target="_blank" className="social_icon_wrapper">
                 <img src={referlinkIcon} className="social_icon" alt="logo" />
               </a>
             </div>
             <h2>YOUR CODE</h2>
-            <p>RABJTDFV</p>
+            <p>{userData ? getUpperCased(userData.referralCode) : "00000000"}</p>
           </div>
         </div> 
       </div>
