@@ -36,7 +36,7 @@ const EmailVerified = () => {
         generateReferral();
       } catch (error) {
         console.log(error);
-        //setValidUrl(false);
+        setValidUrl(false);
       }
     };
     verifyEmailUrl();
