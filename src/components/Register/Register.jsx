@@ -45,7 +45,7 @@ const Register = () => {
       if(paramId !== null){
         rewardUser();
       }
-      //window.location = "/webcam";
+      window.location = "/webcam";
     } 
     catch (error) {
       if (
