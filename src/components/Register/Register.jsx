@@ -27,7 +27,7 @@ const Register = () => {
 
   const rewardUser = async () => {
     try {
-      const url = `http://localhost:8080/api/users/${paramId}/rewarduser`;
+      const url = `${process.env.BASE_URL}/api/users/${paramId}/rewarduser`;
       const { data } = await axios.post(url);
       console.log(data);
     } catch(error) {
@@ -38,7 +38,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8080/api/users/signup";
+      const url = `${process.env.BASE_URL}/api/users/signup`;
       const { data: res } = await axios.post(url, data);
       setMsg(res.message);
       localStorage.setItem("userId", res.userId);

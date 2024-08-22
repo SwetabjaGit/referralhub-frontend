@@ -20,14 +20,14 @@ const Dashboard = () => {
 
   useEffect(() => {
     const generateReferralLink = (code) => {
-      return `http://localhost:5173/register?referralCode=${code}`;
+      return `${process.env.BASE_URL}/register?referralCode=${code}`;
     }
 
     const getUserDetails = async () => {
       try {
         const options = {
           method: 'GET',
-          url: 'http://localhost:8080/api/users/getuserdetails',
+          url: `${process.env.BASE_URL}/api/users/getuserdetails`,
           headers: {
             'auth-token': localStorage.getItem("token")
           }

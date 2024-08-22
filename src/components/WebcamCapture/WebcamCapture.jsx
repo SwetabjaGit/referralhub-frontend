@@ -32,7 +32,7 @@ const WebcamCapture = () => {
 
   const updateImageUrl = async (s3location) => {
     try {
-      const url = `http://localhost:8080/api/users/${userId}/updateimageurl`;
+      const url = `${process.env.BASE_URL}/api/users/${userId}/updateimageurl`;
       const data = {
         imageUrl: s3location
       }
@@ -55,7 +55,7 @@ const WebcamCapture = () => {
       formData.append("image", image);
       //var data = imgSrc.toString().replace(/^data:image\/jpg;base64,/, "");
       //var buf = Buffer.from(data, "base64");
-      await fetch('http://localhost:8080/api/upload', {
+      await fetch(`${process.env.BASE_URL}/api/upload`, {
         method: 'POST',
         body: formData
       }).then((res) => res.json())
