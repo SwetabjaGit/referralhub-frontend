@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const generateReferralLink = (code) => {
-      return `${baseurl}/register?referralCode=${code}`;
+      return `https://referral-hub.netlify.app/register?referralCode=${code}`;
     }
 
     const getUserDetails = async () => {
@@ -141,16 +141,16 @@ const Dashboard = () => {
           <div className="referral_share_box">
             <h2>SHARE NOW</h2>
             <div className="social_icons_container">
-              <a href={socialLinks.whatsapp} target="_blank" className="social_icon_wrapper">
+              <a href={socialLinks.whatsapp + " " + referralLink} target="_blank" className="social_icon_wrapper">
                 <img src={whatsappIcon} className="social_icon" alt="logo" />
               </a>
-              <a href={socialLinks.facebook} target="_blank" className="social_icon_wrapper">
+              <a href={socialLinks.facebook + " " + referralLink} target="_blank" className="social_icon_wrapper">
                 <img src={facebookIcon} className="social_icon" alt="logo" />
               </a>
-              <a href={socialLinks.twitter} target="_blank" className="social_icon_wrapper">
+              <a href={socialLinks.twitter + " " + referralLink} target="_blank" className="social_icon_wrapper">
                 <img src={twitterIcon} className="social_icon" alt="logo" />
               </a>
-              <a href={socialLinks.telegram} target="_blank" className="social_icon_wrapper">
+              <a href={socialLinks.telegram + "  " + referralLink} target="_blank" className="social_icon_wrapper">
                 <img src={telegramIcon} className="social_icon" alt="logo" />
               </a>
               <a href={referralLink} target="_blank" className="social_icon_wrapper">
