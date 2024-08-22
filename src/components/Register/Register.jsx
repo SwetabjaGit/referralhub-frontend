@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./styles.module.css";
+import baseurl from "../../utils/baseurl";
 
 
 const Register = () => {
@@ -27,7 +28,7 @@ const Register = () => {
 
   const rewardUser = async () => {
     try {
-      const url = `${process.env.BASE_URL}/api/users/${paramId}/rewarduser`;
+      const url = `${baseurl}/api/users/${paramId}/rewarduser`;
       const { data } = await axios.post(url);
       console.log(data);
     } catch(error) {
@@ -38,7 +39,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = `${process.env.BASE_URL}/api/users/signup`;
+      const url = `${baseurl}/api/users/signup`;
       const { data: res } = await axios.post(url, data);
       setMsg(res.message);
       localStorage.setItem("userId", res.userId);

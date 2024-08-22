@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Webcam from "react-webcam";
 import './WebcamCapture.css';
 import axios from 'axios';
+import baseurl from "../../utils/baseurl";
 
 
 const WebcamCapture = () => {
@@ -32,7 +33,7 @@ const WebcamCapture = () => {
 
   const updateImageUrl = async (s3location) => {
     try {
-      const url = `${process.env.BASE_URL}/api/users/${userId}/updateimageurl`;
+      const url = `${baseurl}/api/users/${userId}/updateimageurl`;
       const data = {
         imageUrl: s3location
       }
@@ -55,7 +56,7 @@ const WebcamCapture = () => {
       formData.append("image", image);
       //var data = imgSrc.toString().replace(/^data:image\/jpg;base64,/, "");
       //var buf = Buffer.from(data, "base64");
-      await fetch(`${process.env.BASE_URL}/api/upload`, {
+      await fetch(`${baseurl}/api/upload`, {
         method: 'POST',
         body: formData
       }).then((res) => res.json())

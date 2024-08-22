@@ -11,6 +11,8 @@ import telegramIcon from "../../assets/telegram.svg";
 import referlinkIcon from "../../assets/referlink.svg";
 import socialLinks from "../../utils/socialLinks";
 
+import baseurl from "../../utils/baseurl";
+
 Chart.register(CategoryScale);
 
 
@@ -20,14 +22,14 @@ const Dashboard = () => {
 
   useEffect(() => {
     const generateReferralLink = (code) => {
-      return `${process.env.BASE_URL}/register?referralCode=${code}`;
+      return `${baseurl}/register?referralCode=${code}`;
     }
 
     const getUserDetails = async () => {
       try {
         const options = {
           method: 'GET',
-          url: `${process.env.BASE_URL}/api/users/getuserdetails`,
+          url: `${baseurl}/api/users/getuserdetails`,
           headers: {
             'auth-token': localStorage.getItem("token")
           }

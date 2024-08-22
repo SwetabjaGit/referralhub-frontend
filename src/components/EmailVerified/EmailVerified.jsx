@@ -5,6 +5,8 @@ import axios from "axios";
 import success from "../../assets/success3.png";
 import "./EmailVerified.css";
 
+import baseurl from "../../utils/baseurl";
+
 
 const EmailVerified = () => {
   const [validUrl, setValidUrl] = useState(true);
@@ -13,7 +15,7 @@ const EmailVerified = () => {
   useEffect(() => {
     const generateReferral = async () => {
       try {
-        const url = `${process.env.BASE_URL}/api/users/${param.id}/generatereferral`;
+        const url = `${baseurl}/api/users/${param.id}/generatereferral`;
         const { data } = await axios.post(url);
         console.log(data);
       } catch(error) {
@@ -23,7 +25,7 @@ const EmailVerified = () => {
 
     const verifyEmailUrl = async () => {
       try {
-        const url = `${process.env.BASE_URL}/api/users/${param.id}/verify/${param.token}`;
+        const url = `${baseurl}/api/users/${param.id}/verify/${param.token}`;
         const { data } = await axios.get(url);
         /* await fetch(url)
           .then((res) => res.json())
