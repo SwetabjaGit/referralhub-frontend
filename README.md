@@ -1,7 +1,6 @@
-# React + Vite Code for Trendify Admin
+# React + Vite Code for ReferralHub-Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules. \
-Open [https://trendify-admin.netlify.app/](https://trendify-admin.netlify.app/) to view it in your browser.
+Open [https://referral-hub.netlify.app/](https://referral-hub.netlify.app/) to view it in your browser.
 
 ## Available Scripts
 
