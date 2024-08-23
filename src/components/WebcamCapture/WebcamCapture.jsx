@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import Webcam from "react-webcam";
 import './WebcamCapture.css';
 import axios from 'axios';
@@ -10,7 +9,6 @@ const WebcamCapture = () => {
   const webcamRef = useRef(null);
   const inputFile = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
-  const { state } = useLocation();
   const [displayWarning, setDisplayWarning] = useState(false);
   const [userId, setUserId] = useState(null);
 
@@ -31,11 +29,11 @@ const WebcamCapture = () => {
     setImgSrc(null);
   }
 
-  const updateImageUrl = async (s3location) => {
+  const updateImageUrl = async (location) => {
     try {
       const url = `${baseurl}/api/users/${userId}/updateimageurl`;
       const data = {
-        imageUrl: s3location
+        imageUrl: location
       }
       const { data: res } = await axios.post(url, data);
       console.log(res);
@@ -47,15 +45,39 @@ const WebcamCapture = () => {
     }
   }
 
-  const handleUploadImage = async (e) => {
+  const handleUploadImageCloudinary = async () => {
+    if(imgSrc == null) {
+      setDisplayWarning(true);
+      console.log("Image is null");
+    } else {
+      let formData = new FormData();
+
+      formData.append("file", imgSrc);
+      formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
+      formData.append("api_key", import.meta.env.VITE_CLOUDINARY_API_KEY);
+      formData.append("folder", "webcam");
+
+      await fetch(
+        `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData
+        }
+      ).then(res => {
+        return res.json()
+      }).then(data => {
+        updateImageUrl(data.secure_url);
+      })
+    }
+  }
+
+  const handleUploadImageAwsS3 = async (e) => {
     let responseData;
     if(imgSrc !== null){
       const image = e.target.files[0];
-      console.log(image);
+      //console.log(image);
       let formData = new FormData();
       formData.append("image", image);
-      //var data = imgSrc.toString().replace(/^data:image\/jpg;base64,/, "");
-      //var buf = Buffer.from(data, "base64");
       await fetch(`${baseurl}/api/upload`, {
         method: 'POST',
         body: formData
@@ -100,7 +122,9 @@ const WebcamCapture = () => {
         )}
       </div>
       <div className="webcam-right-panel">
-        <p className='webcam-heading-text'>Take picture to complete Registration?</p>
+        <p className='webcam-heading-text'>
+          Take picture to complete Registration?
+        </p>
         {imgSrc ? (
             <button className='webcam-capture-button' onClick={retake}>
               Retake Photo
@@ -110,14 +134,14 @@ const WebcamCapture = () => {
               Capture Photo
             </button>
         )}
-        <input
+        {/* <input
           type="file"
           ref={inputFile}
           style={{ display: 'none' }}
           accept="image/*"
-          onChange={handleUploadImage}
-        />
-        <button className='webcam-capture-button' onClick={onSubmitImage} >
+          onChange={handleUploadImageCloudinary}
+        /> */}
+        <button className='webcam-capture-button' onClick={handleUploadImageCloudinary} >
           Complete Sign Up
         </button>
         {displayWarning && <p className="capture-image-warning-text">Capture Image before Uploading</p>}

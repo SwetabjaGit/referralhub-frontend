@@ -26,9 +26,9 @@ const Register = () => {
     setData({ ...data, [input.name]: input.value });
   };
 
-  const rewardUser = async () => {
+  const rewardUser = async (registeredUserId) => {
     try {
-      const url = `${baseurl}/api/users/${paramId}/rewarduser`;
+      const url = `${baseurl}/api/users/${registeredUserId}/rewarduser/${paramId}`;
       const { data } = await axios.post(url);
       console.log(data);
     } catch(error) {
@@ -43,8 +43,9 @@ const Register = () => {
       const { data: res } = await axios.post(url, data);
       setMsg(res.message);
       localStorage.setItem("userId", res.userId);
+      localStorage.setItem("userEmail", data.email);
       if(paramId !== null){
-        rewardUser();
+        await rewardUser(res.userId);
       }
       window.location = "/webcam";
     } 

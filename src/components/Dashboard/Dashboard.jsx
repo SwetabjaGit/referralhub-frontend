@@ -56,22 +56,29 @@ const Dashboard = () => {
     ]
   };
 
-  const getDateFromTimestamp = (date) => {
+  const getDateFromTimestamp = (date, from) => {
     let timestamp = new Date(date);
     let monthName = timestamp.toLocaleString("en-US", { month: "long" });
-    let dateString = timestamp.getDate() +" "+ monthName + " "+ timestamp.getFullYear();
+    //let dateString = timestamp.getDate() +" "+ monthName +" "+ timestamp.getFullYear();
+    let dateArray = timestamp.toUTCString().split(" ");
+    let dateString = dateArray[0] + " " + dateArray[1] + " " + dateArray[2] + " " + dateArray[3]; 
     //console.log(dateString);
     return dateString;
   }
 
   const getUpperCased = (str) => {
-    return str.toUpperCase();
+    if(str == null){
+      return "NULL";
+    } else {
+      return str.toUpperCase();
+    }
   }
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
   };
+
 
   return (
     <div className="main_dashboard_container">
@@ -159,6 +166,28 @@ const Dashboard = () => {
             </div>
             <h2>YOUR CODE</h2>
             <p>{userData ? getUpperCased(userData.referralCode) : "00000000"}</p>
+          </div>
+          <div className="referred_users_box">
+            <h2>REFERRED FRIENDS</h2>
+            <div className="referred_users_divider"></div>
+            {userData && 
+              userData.referrals && 
+              userData.referrals.length > 0 ?
+              userData.referrals.map(item => {
+                return (
+                  <div key={item.email} className="referred_user_item">
+                    <div className="user_item_left">
+                      <span>{item.email}</span>
+                    </div>
+                    <div className="user_item_right">
+                      <span>{getDateFromTimestamp(item.referralDate)}</span>
+                    </div>
+                  </div>
+                )
+              }) : (
+                <h2>You have not referred any friends</h2>
+              )
+            }
           </div>
         </div> 
       </div>
