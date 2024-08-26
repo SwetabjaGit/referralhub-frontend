@@ -11,6 +11,7 @@ const WebcamCapture = () => {
   const [imgSrc, setImgSrc] = useState(null);
   const [displayWarning, setDisplayWarning] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
@@ -38,9 +39,11 @@ const WebcamCapture = () => {
       const { data: res } = await axios.post(url, data);
       console.log(res);
       localStorage.removeItem("userId");
+      setLoading(false);
       window.location = "/emailsent";
     }
     catch(error) {
+      setLoading(false);
       console.log(error);
     }
   }
@@ -50,6 +53,7 @@ const WebcamCapture = () => {
       setDisplayWarning(true);
       console.log("Image is null");
     } else {
+      setLoading(true);
       let formData = new FormData();
 
       formData.append("file", imgSrc);

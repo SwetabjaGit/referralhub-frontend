@@ -11,19 +11,23 @@ const Login = () => {
     password: "" 
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const url = `${baseurl}/api/auth/login`;
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
+      setLoading(false);
       window.location = "/";
     } catch (error) {
+      setLoading(false);
       if (
         error.response &&
         error.response.status >= 400 &&

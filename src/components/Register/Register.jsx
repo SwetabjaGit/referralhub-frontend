@@ -15,6 +15,7 @@ const Register = () => {
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
   const [paramId, setParamId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     console.log('referralCode: ', urlParams);
@@ -38,6 +39,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const url = `${baseurl}/api/users/signup`;
       const { data: res } = await axios.post(url, data);
@@ -47,9 +49,11 @@ const Register = () => {
       if(paramId !== null){
         await rewardUser(res.userId);
       }
+      setLoading(false);
       window.location = "/webcam";
     } 
     catch (error) {
+      setLoading(false);
       if (
         error.response &&
         error.response.status >= 400 &&
