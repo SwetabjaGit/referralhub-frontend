@@ -116,6 +116,7 @@ const WebcamCapture = () => {
             <img src={imgSrc} alt="webcam" />
           ) : (
             <Webcam
+              className="webcam-frame"
               width={600} 
               height={450} 
               ref={webcamRef} 
@@ -149,6 +150,9 @@ const WebcamCapture = () => {
           Complete Sign Up
         </button>
         {displayWarning && <p className="capture-image-warning-text">Capture Image before Uploading</p>}
+        <div className="webcam-loader-container">
+          {loading && <div className="loader"></div>}
+        </div>
       </div>
     </div>
   )

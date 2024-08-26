@@ -1,22 +1,18 @@
 .webcam-container {
   display: flex;
   flex-direction: row;
+  max-width: 1000px;
   align-items: center;
+  margin: 0 auto;
   margin-top: 110px;
-  margin-right: 100px;
 }
 
 .webcam-left-panel {
-  padding: 20px;
-  width: 66%;
+  width: 60%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 img, video {
-  margin-left: 100px;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -25,18 +21,18 @@ img, video {
 
 .webcam-right-panel {
   padding: 20px;
-  width: 33%;
-  margin-left: -20px;
+  width: 40%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .webcam-heading-text {
   font-size: 28px;
   font-weight: 600;
-  margin-left: 0px;
+  margin-left: 22px;
 }
-
 
 
 
@@ -66,6 +62,14 @@ img, video {
 }
 
 
+.webcam-loader-container {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
 @media (max-width: 1200px) {
   img, video {
     margin-left: 0px;
@@ -81,13 +85,6 @@ img, video {
 }
 
 @media (max-width: 900px) {
-  .webcam-capture-button {
-    margin: 15px 0;
-    width: 180px;
-    font-size: 16px;
-    padding: 10px 10px;
-  }
-
   .webcam-right-panel {
     margin-left: -10px;
   }
@@ -95,5 +92,14 @@ img, video {
   .webcam-heading-text {
     font-size: 24px;
     line-height: 1.2;
+  }
+}
+
+@media (max-width: 700px) {
+  .webcam-capture-button {
+    margin: 15px 0;
+    width: 180px;
+    font-size: 14px;
+    padding: 10px 10px;
   }
 }

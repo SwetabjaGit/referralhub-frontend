@@ -101,6 +101,7 @@ const Register = () => {
             <button type="submit" className={styles.green_btn}>
               Register
             </button>
+            {loading && <div className="loader"></div>}
           </form>
         </div>
       </div>

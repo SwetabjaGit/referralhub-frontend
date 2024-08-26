@@ -66,6 +66,7 @@ const Login = () => {
             <button type="submit" className={styles.green_btn}>
               Login
             </button>
+            {loading && <div className="loader"></div>}
           </form>
         </div>
         <div className={styles.right}>
