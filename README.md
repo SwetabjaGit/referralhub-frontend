@@ -1,6 +1,6 @@
 # React + Vite Code for ReferralHub-Frontend
 
-1: Open [https://referral-hub.netlify.app/](https://referral-hub.netlify.app/) to view it in your browser.\
+1: Open [https://referral-hub.netlify.app/](https://referral-hub.netlify.app/) to view it in your browser.
 
 2: Open [https://referral-hub-123.vercel.app/](https://referral-hub-123.vercel.app/) to view it in your browser.
 
